@@ -8,7 +8,23 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-    res.send('This will be the homepage soon.');
+    res.render('landing');
+});
+
+app.get('/playgrounds', function(req, res) {
+    var playgroundList = [
+        { name: 'Park One',
+          image: 'https://via.placeholder.com/150'
+        },
+        { name: 'Park Two',
+          image: 'https://via.placeholder.com/150'
+        },
+        { name: 'Park Three',
+          image: 'https://via.placeholder.com/150'
+        }
+    ];
+
+    res.render('playgrounds', { playgrounds: playgroundList });
 });
 
 app.listen(process.env.PORT, function() {

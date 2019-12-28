@@ -1,0 +1,9 @@
+<h1>Playgrounds</h1>
+
+<% playgrounds.forEach(function(playground) { %>
+    <div>
+        <h4><%= playground.name %></h4>
+        <img src="<%= playground.image %>" alt="<%= playground.name %> Image">
+    
+    </div>
+<% }) %>
