@@ -18,6 +18,24 @@ var playgroundList = [
     },
     { name: 'Park Three',
       image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Four',
+      image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Five',
+      image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Six',
+      image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Seven',
+      image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Eight',
+      image: 'https://via.placeholder.com/150'
+    },
+    { name: 'Park Nine',
+      image: 'https://via.placeholder.com/150'
     }
 ];
 
