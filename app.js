@@ -5,6 +5,8 @@ const ejs = require('ejs');
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
@@ -25,6 +27,15 @@ app.get('/playgrounds', function(req, res) {
     ];
 
     res.render('playgrounds', { playgrounds: playgroundList });
+});
+
+app.post('/playgrounds', function(req, res) {
+    // get data from form
+
+    // add to array
+    playgroundList.push(newPlayground);
+    // redirect to playgrounds
+    res.redirect('/playgrounds');
 });
 
 app.listen(process.env.PORT, function() {
