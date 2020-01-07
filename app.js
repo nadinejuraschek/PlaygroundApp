@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-const express = require('express');
-const ejs = require('ejs');
-
-const app = express();
+const express = require('express'),
+  app         = express(),
+  ejs         = require('ejs'),
+  mongoose    = require('mongoose');
 
 app.use(express.urlencoded({ extended: true }));
 
