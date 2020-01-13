@@ -5,55 +5,60 @@ const express = require('express'),
   ejs         = require('ejs'),
   mongoose    = require('mongoose');
 
+// connect to database
+mongoose.connect('mongodb://localhost/playground_app');
+
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
-var playgroundList = [
-    { name: 'Park One',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Two',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Three',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Four',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Five',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Six',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Seven',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Eight',
-      image: 'https://via.placeholder.com/150'
-    },
-    { name: 'Park Nine',
-      image: 'https://via.placeholder.com/150'
-    }
-];
+// SCHEMA SETUP
+let playgroundSchema = new mongoose.Schema({
+  name: String,
+  image: String
+});
+
+let Playground = mongoose.model('Playground', playgroundSchema);
+
+// Playground.create({ 
+//   name: 'Park Two',
+//   image: 'https://via.placeholder.com/150'
+// }, function(err, playground){
+//   if(err) {
+//      console.log("Error: " + err);
+//   } else {
+//     console.log("New playground has been created:");
+//     console.log(playground);
+//   }
+// });
 
 app.get('/', function(req, res) {
     res.render('landing');
 });
 
 app.get('/playgrounds', function(req, res) {
-    res.render('playgrounds', { playgrounds: playgroundList });
+    // get all playgrounds from DB
+    Playground.find({}, function(err, allPlaygrounds){
+      if(err){
+        console.log("Error: " + err);
+      } else {
+        res.render('playgrounds', { playgrounds: allPlaygrounds });
+      };
+    });
 });
 
 app.post('/playgrounds', function(req, res) {
     // get data from form
     var newPlayground = { name: req.body.playgroundName, image: req.body.playgroundImg }
-    // add to array
-    playgroundList.push(newPlayground);
-    // redirect to playgrounds
-    res.redirect('/playgrounds');
+    // create new playground and save to DB
+    Playground.create(newPlayground, function(err, addPlayground) {
+      if(err) {
+        console.log('Error: ' + err);
+      } else {
+        // redirect to playgrounds
+        res.redirect('/playgrounds');
+      };
+    });
 });
 
 app.get('/playgrounds/new', function(req, res) {
