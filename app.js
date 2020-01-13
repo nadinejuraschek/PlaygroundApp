@@ -6,7 +6,7 @@ const express = require('express'),
   mongoose    = require('mongoose');
 
 // connect to database
-mongoose.connect('mongodb://localhost/playground_app');
+mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.urlencoded({ extended: true }));
 
