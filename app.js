@@ -21,7 +21,7 @@ let playgroundSchema = new mongoose.Schema({
 
 let Playground = mongoose.model('Playground', playgroundSchema);
 
-// CREATE
+// CREATE -- add new campground to DB
 
 // Playground.create({ 
 //   name: 'Park Two',
@@ -54,7 +54,7 @@ app.get('/index', function(req, res) {
 // NEW - show form to add playground
 app.post('/index', function(req, res) {
     // get data from form
-    var newPlayground = { name: req.body.playgroundName, image: req.body.playgroundImg }
+    let newPlayground = { name: req.body.playgroundName, image: req.body.playgroundImg, description: req.body.description };
     // create new playground and save to DB
     Playground.create(newPlayground, function(err, addPlayground) {
       if(err) {
