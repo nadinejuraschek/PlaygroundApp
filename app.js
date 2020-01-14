@@ -73,8 +73,11 @@ app.get('/playgrounds/new', function(req, res) {
 // SHOW - displays more info about a specific playground
 app.get('/playgrounds/:id', function(req, res) {
     // find playground with provided ID
+    Playground.findById(req.params.id, function(err, foundPlayground){
+      if (err) console.log(err);
+      res.render('show', { playground: foundPlayground });
+    });
     // render show temp with that playground
-    res.render('show');
 });
 
 app.listen(process.env.PORT, function() {

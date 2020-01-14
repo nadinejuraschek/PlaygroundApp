@@ -1,1 +1,9 @@
-<h1>Show template...</h1>
+<%- include ('partials/header') -%>
+
+<h1><%= playground.name %></h1>
+
+<img src="<%= playground.image %>">
+
+<p><%= playground.description %></p>
+
+<%- include ('partials/footer') -%>
