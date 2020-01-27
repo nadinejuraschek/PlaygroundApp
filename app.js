@@ -33,18 +33,25 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  next();
+})
+
 // CREATE -- add new campground to DB
 app.get('/', function(req, res) {
     res.render('landing');
 });
 
 app.get('/playgrounds', function(req, res) {
+    let currentUser = req.user;
+    console.log(currentUser);
     // get all playgrounds from DB
     Playground.find({}, function(err, allPlaygrounds){
       if(err){
         console.log("Error: " + err);
       } else {
-        res.render('playgrounds/index', { playgrounds: allPlaygrounds });
+        res.render('playgrounds/index', { playgrounds: allPlaygrounds, currentUser: currentUser });
       };
     });
 });
