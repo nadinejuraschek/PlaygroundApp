@@ -1,13 +1,15 @@
 require('dotenv').config();
 
-const express     = require('express'),
-      app         = express(),
-      ejs         = require('ejs'),
-      mongoose    = require('mongoose'),
-      Playground  = require('./models/playground'),
-      Comment     = require('./models/comment'),
-      User        = require('./models/user'),
-      seedDB      = require('./seeds');
+const express       = require('express'),
+      app           = express(),
+      ejs           = require('ejs'),
+      mongoose      = require('mongoose'),
+      passport      = require('passport'),
+      LocalStrategy = require('passport-local'),
+      Playground    = require('./models/playground'),
+      Comment       = require('./models/comment'),
+      User          = require('./models/user'),
+      seedDB        = require('./seeds');
 
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
