@@ -63,7 +63,7 @@ app.post('/playgrounds', function(req, res) {
       };
     });
 });
-app.get('/playgrounds/new', function(req, res) {
+app.get('/playgrounds/new', isLoggedIn, function(req, res) {
     res.render('playgrounds/new.ejs');
 });
 
@@ -97,7 +97,7 @@ app.post('/playgrounds/:id/comments', function(req, res){
     };
   });
 });
-app.get('/playgrounds/:id/comments/new', function(req, res){
+app.get('/playgrounds/:id/comments/new', isLoggedIn, function(req, res){
   // look up playground with id
   Playground.findById(req.params.id, function(err, playground){
     if (err) {
@@ -117,9 +117,11 @@ app.get('/playgrounds/:id/comments/new', function(req, res){
 /**********************************************
  AUTH ROUTES
 **********************************************/
+// show signup form
 app.get('/register', function(req, res){
   res.render('register');
 })
+// handle sign up logic
 app.post('/register', function(req, res){
   const newUser = new User({ username: req.body.username });
   User.register(newUser, req.body.password, function(err, user) {
@@ -132,6 +134,29 @@ app.post('/register', function(req, res){
     });
   });
 });
+// show login form
+app.get('/login', function(req, res){
+  res.render('login');
+});
+// handle login logic
+app.post('/login', passport.authenticate('local', 
+  { 
+    successRedirect: '/playgrounds', 
+    failureRedirect: '/login'
+  }), function(req, res){
+});
+// logout route
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  };
+  res.redirect('/login');
+};
 
 app.listen(process.env.PORT, function() {
     console.log('Server listening on PORT ' + process.env.PORT + '.');
