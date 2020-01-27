@@ -1,0 +1,12 @@
+/**********************************************
+ PLAYGROUND DETAIL VIEW
+**********************************************/
+.card img {
+    width: 100%;
+}
+.card {
+    padding: 0;
+}
+.card .caption {
+    padding: 0.5rem;
+}

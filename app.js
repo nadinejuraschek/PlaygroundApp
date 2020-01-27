@@ -9,13 +9,15 @@ const express     = require('express'),
       User        = require('./models/user'),
       seedDB      = require('./seeds');
 
-seedDB();
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+
+seedDB();
 
 // CREATE -- add new campground to DB
 app.get('/', function(req, res) {
