@@ -1,9 +1,10 @@
 require('dotenv').config();
 
-const express = require('express'),
-  app         = express(),
-  ejs         = require('ejs'),
-  mongoose    = require('mongoose');
+const express     = require('express'),
+      app         = express(),
+      ejs         = require('ejs'),
+      mongoose    = require('mongoose'),
+      Playground  = require('./models/playground');
 
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -11,15 +12,6 @@ mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: 
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
-
-// SCHEMA SETUP
-let playgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-let Playground = mongoose.model('Playground', playgroundSchema);
 
 // CREATE -- add new campground to DB
 
