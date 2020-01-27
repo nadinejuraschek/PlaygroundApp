@@ -4,7 +4,9 @@ const express     = require('express'),
       app         = express(),
       ejs         = require('ejs'),
       mongoose    = require('mongoose'),
-      Playground  = require('./models/playground');
+      Playground  = require('./models/playground'),
+      Comment     = require('./models/comment'),
+      User        = require('./models/user');
 
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
