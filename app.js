@@ -6,8 +6,10 @@ const express     = require('express'),
       mongoose    = require('mongoose'),
       Playground  = require('./models/playground'),
       Comment     = require('./models/comment'),
-      User        = require('./models/user');
+      User        = require('./models/user'),
+      seedDB      = require('./seeds');
 
+// seedDB();
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -16,19 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // CREATE -- add new campground to DB
-
-// Playground.create({ 
-//   name: 'Park Two',
-//   image: 'https://via.placeholder.com/150', 
-//   description: 'Soon to be playground data'
-// }, function(err, playground){
-//   if(err) {
-//      console.log("Error: " + err);
-//   } else {
-//     console.log("New playground has been created:");
-//     console.log(playground);
-//   }
-// });
 
 app.get('/', function(req, res) {
     res.render('landing');
@@ -67,7 +56,7 @@ app.get('/playgrounds/new', function(req, res) {
 // SHOW - displays more info about a specific playground
 app.get('/playgrounds/:id', function(req, res) {
     // find playground with provided ID
-    Playground.findById(req.params.id, function(err, foundPlayground){
+    Playground.findById(req.params.id).populate('comments').exec(function(err, foundPlayground){
       if (err) console.log(err);
       res.render('show', { playground: foundPlayground });
     });
