@@ -114,6 +114,25 @@ app.get('/playgrounds/:id/comments/new', function(req, res){
   // redirect playground show page
 });
 
+/**********************************************
+ AUTH ROUTES
+**********************************************/
+app.get('/register', function(req, res){
+  res.render('register');
+})
+app.post('/register', function(req, res){
+  const newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.render('register');
+    }
+    passport.authenticate('local')(req, res, function(){
+      res.redirect('/playgrounds');
+    });
+  });
+});
+
 app.listen(process.env.PORT, function() {
     console.log('Server listening on PORT ' + process.env.PORT + '.');
 });
