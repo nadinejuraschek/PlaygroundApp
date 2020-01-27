@@ -21,6 +21,18 @@ app.use(express.static(__dirname + '/public'));
 
 seedDB();
 
+// PASSPORT CONFIG
+app.use(require('express-session')({
+  secret: process.env.APP_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 // CREATE -- add new campground to DB
 app.get('/', function(req, res) {
     res.render('landing');
