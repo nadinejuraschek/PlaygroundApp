@@ -1,6 +1,6 @@
-const   mongoose      = require("mongoose"),
-        Playground    = require("./models/playground"),
-        Comment       = require("./models/comment");
+var mongoose = require("mongoose");
+var Playground = require("./models/playground");
+var Comment   = require("./models/comment");
  
 var data = [
     {
@@ -29,12 +29,12 @@ function seedDB(){
         console.log("removed playgrounds!");
         Comment.remove({}, function(err) {
             if(err){
-                console.log("Error: " + err);
+                console.log(err);
             }
             console.log("removed comments!");
-            //add a few playgrounds
+             //add a few playgrounds
             data.forEach(function(seed){
-                Playground.create(seed, function(err, plaground){
+                Playground.create(seed, function(err, playground){
                     if(err){
                         console.log(err)
                     } else {

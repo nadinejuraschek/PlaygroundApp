@@ -6,6 +6,10 @@
 
 <p><%= playground.description %></p>
 
+<p>
+    <a class="btn btn-success" href="/playgrounds/<%= playground._id %>/comments/new">Add a Comment</a>
+</p>
+
 <% playground.comments.forEach(function(comment){ %>
     <p>
         <strong><%= comment.author %></strong> - <% comment.text %>

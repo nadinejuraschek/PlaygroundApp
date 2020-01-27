@@ -4,7 +4,7 @@
     <div class="row">
         <h1 class="text-center">Add Comment to <%= playground.name %></h1>
 
-        <div style="width: 30%; margin: 2rem auto;">
+        <div>
             <form action="/playgrounds/<%= playground._id %>/comments" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="comment[text]" placeholder="comment">

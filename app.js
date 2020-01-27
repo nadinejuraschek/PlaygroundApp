@@ -9,7 +9,7 @@ const express     = require('express'),
       User        = require('./models/user'),
       seedDB      = require('./seeds');
 
-// seedDB();
+seedDB();
 // connect to database
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -62,8 +62,27 @@ app.get('/playgrounds/:id', function(req, res) {
 });
 
 // COMMENTS
-app.get('/playgrounds/:id/comments/new', function(req, res){
+app.post('/playgrounds/:id/comments', function(req, res){
   // find playground by id
+  Playground.findById(req.params.id, function(err, playground){
+    if (err) {
+      console.log("Error: " + err);
+      res.redirect('/playgrounds');
+    } else {
+      Comment.create(req.body.comment, function(err, comment){
+        if (err) {
+          console.log("Error: " + err);
+        } else {
+          playground.comments.push(comment);
+          playground.save();
+          res.redirect('/playgrounds/' + playground._id);
+        };
+      });
+    };
+  });
+});
+app.get('/playgrounds/:id/comments/new', function(req, res){
+  // look up playground with id
   Playground.findById(req.params.id, function(err, playground){
     if (err) {
       console.log("Error: " + err);
@@ -72,9 +91,11 @@ app.get('/playgrounds/:id/comments/new', function(req, res){
       res.render('comments/new', {playground: playground})
     };
   });
-});
-app.get('/playgrounds/:id/comments', function(req, res){
+  // create new comment
 
+  // connect new comment
+
+  // redirect playground show page
 });
 
 app.listen(process.env.PORT, function() {
