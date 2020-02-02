@@ -3,14 +3,10 @@
 <div class="container">
     <div class="row">
         <h1 class="text-center">Add Comment to <%= playground.name %></h1>
-
         <div>
             <form action="/playgrounds/<%= playground._id %>/comments" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="comment[text]" placeholder="comment">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="author[text]" placeholder="author">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-danger btn-block"></button>

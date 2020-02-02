@@ -1,5 +1,5 @@
-const   express     = require('express');
-        router      = express.Router(),
+const   express     = require('express'),
+        router      = express.Router({mergeParams: true}),
         Playground  = require('../models/playground'),
         Comment     = require('../models/comment');
 
@@ -7,12 +7,13 @@ const   express     = require('express');
 router.get('/new', isLoggedIn, function(req, res){
     // look up playground with id
     Playground.findById(req.params.id, function(err, playground){
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            // console.log(playground);
-            res.render('comments/new', {playground: playground})
-        };
+      if (err) {
+        console.log("Error: " + err);
+      } else {
+        // console.log(req.params.id);
+        // console.log(playground);
+        res.render('comments/new', { playground: playground });
+      };
     });
 });
 // comments create
@@ -27,6 +28,12 @@ router.post('/', function(req, res){
           if (err) {
             console.log("Error: " + err);
           } else {
+            // add username and id
+            // console.log(req.user.username);
+            comment.author.id = req.user._id;
+            comment.author.username = req.user.username;
+            // save comment
+            comment.save();
             playground.comments.push(comment);
             playground.save();
             res.redirect('/playgrounds/' + playground._id);

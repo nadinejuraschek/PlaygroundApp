@@ -27,36 +27,36 @@ function seedDB(){
             console.log(err);
         }
         console.log("removed playgrounds!");
-        Comment.remove({}, function(err) {
-            if(err){
-                console.log(err);
-            }
-            console.log("removed comments!");
-             //add a few playgrounds
-            data.forEach(function(seed){
-                Playground.create(seed, function(err, playground){
-                    if(err){
-                        console.log(err)
-                    } else {
-                        console.log("added a playground");
-                        //create a comment
-                        Comment.create(
-                            {
-                                text: "This place is great, but I wish there was internet",
-                                author: "Homer"
-                            }, function(err, comment){
-                                if(err){
-                                    console.log(err);
-                                } else {
-                                    playground.comments.push(comment);
-                                    playground.save();
-                                    console.log("Created new comment");
-                                }
-                            });
-                    }
-                });
-            });
-        });
+//         Comment.remove({}, function(err) {
+//             if(err){
+//                 console.log(err);
+//             }
+//             console.log("removed comments!");
+//              //add a few playgrounds
+//             data.forEach(function(seed){
+//                 Playground.create(seed, function(err, playground){
+//                     if(err){
+//                         console.log(err)
+//                     } else {
+//                         console.log("added a playground");
+//                         //create a comment
+//                         Comment.create(
+//                             {
+//                                 text: "This place is great, but I wish there was internet",
+//                                 author: "Homer"
+//                             }, function(err, comment){
+//                                 if(err){
+//                                     console.log(err);
+//                                 } else {
+//                                     playground.comments.push(comment);
+//                                     playground.save();
+//                                     console.log("Created new comment");
+//                                 }
+//                             });
+//                     }
+//                 });
+//             });
+//         });
     }); 
     //add a few comments
 }

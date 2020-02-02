@@ -17,20 +17,30 @@ router.get('/', function(req, res) {
 // CREATE - add new playground to DB
 router.post('/', function(req, res) {
     // get data from form
-    let newPlayground = { name: req.body.playgroundName, image: req.body.playgroundImg, description: req.body.description };
+    let newPlayground = { 
+      name: req.body.playgroundName, 
+      image: req.body.playgroundImg, 
+      description: req.body.description, 
+      author: { 
+        id: req.user._id, 
+        username: req.user.username 
+      } 
+    };
+
     // create new playground and save to DB
     Playground.create(newPlayground, function(err, addPlayground) {
       if(err) {
         console.log('Error: ' + err);
       } else {
         // redirect to playgrounds
-        res.redirect('/index');
+        console.log(addPlayground);
+        res.redirect('/playgrounds');
       };
     });
 });
 // NEW - show form to add playground
 router.get('/new', isLoggedIn, function(req, res) {
-    res.render('playgrounds/new.ejs');
+    res.render('playgrounds/new');
 });
 
 // SHOW - displays more info about a specific playground

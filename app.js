@@ -11,7 +11,7 @@ const express       = require('express'),
       User          = require('./models/user'),
       seedDB        = require('./seeds');
 
-// requiring routes
+// ROUTES
 const indexRoutes   = require('./routes/index'),
       playRoutes    = require('./routes/playgrounds'),
       commentRoutes = require('./routes/comments');
