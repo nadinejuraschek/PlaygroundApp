@@ -21,6 +21,9 @@
                         <em>Submitted by <%= playground.author.username %></em>
                     </p>
                     <a href='/playgrounds/<%= playground._id %>/edit' class='btn btn-warning'>Edit</a>
+                    <form id="delete-form" action='/playgrounds/<%= playground._id %>?_method=DELETE' method='POST'>
+                        <button class='btn btn-primary'>Delete</button>
+                    </form>
                 </div>
             </div>
             <div class="card bg-faded">

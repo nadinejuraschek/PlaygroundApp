@@ -78,7 +78,13 @@ router.put('/:id', function(req, res){
 
 // DESTROY
 router.delete('/:id', function(req, res){
-  res.send('Deleting...');
+  Playground.findByIdAndRemove(req.params.id, function(err){
+    if (err) {
+      res.redirect('/playgrounds');
+    } else {
+      res.redirect('/playgrounds');
+    }
+  })
 });
 
 function isLoggedIn(req, res, next){
