@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 });
 
 // CREATE - add new playground to DB
-router.post('/', function(req, res) {
+router.post('/', isLoggedIn, function(req, res) {
     // get data from form
     let newPlayground = { 
       name: req.body.playgroundName, 
@@ -51,6 +51,34 @@ router.get('/:id', function(req, res) {
       res.render('playgrounds/show', { playground: foundPlayground });
     });
     // render show temp with that playground
+});
+
+// EDIT 
+router.get('/:id/edit', function(req, res){
+  Playground.findById(req.params.id, function(err, foundPlayground){
+    if(err){
+      res.redirect('/playground');
+    } else {
+      res.render('playgrounds/edit', { playground: foundPlayground });
+    }
+  });
+});
+
+// UPDATE
+router.put('/:id', function(req, res){
+  // find and update playground
+  Playground.findByIdAndUpdate(req.params.id, req.body.playground, function(err, updatedPlayground){
+    if(err){
+      res.redirect('/playgrounds');
+    } else {
+      res.redirect('/playgrounds/' + req.params.id);
+    }
+  })
+});
+
+// DESTROY
+router.delete('/:id', function(req, res){
+  res.send('Deleting...');
 });
 
 function isLoggedIn(req, res, next){

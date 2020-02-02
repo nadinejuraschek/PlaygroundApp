@@ -1,20 +1,21 @@
 require('dotenv').config();
 
-const express       = require('express'),
-      app           = express(),
-      ejs           = require('ejs'),
-      mongoose      = require('mongoose'),
-      passport      = require('passport'),
-      LocalStrategy = require('passport-local'),
-      Playground    = require('./models/playground'),
-      Comment       = require('./models/comment'),
-      User          = require('./models/user'),
-      seedDB        = require('./seeds');
+const express         = require('express'),
+      app             = express(),
+      ejs             = require('ejs'),
+      mongoose        = require('mongoose'),
+      passport        = require('passport'),
+      LocalStrategy   = require('passport-local'),
+      methodOverride  = require('method-override'),
+      Playground      = require('./models/playground'),
+      Comment         = require('./models/comment'),
+      User            = require('./models/user'),
+      seedDB          = require('./seeds');
 
 // ROUTES
-const indexRoutes   = require('./routes/index'),
-      playRoutes    = require('./routes/playgrounds'),
-      commentRoutes = require('./routes/comments');
+const indexRoutes     = require('./routes/index'),
+      playRoutes      = require('./routes/playgrounds'),
+      commentRoutes   = require('./routes/comments');
 
 // DATABASE
 mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use(methodOverride('_method'));
 
 seedDB();
 

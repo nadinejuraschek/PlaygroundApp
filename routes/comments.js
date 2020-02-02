@@ -17,7 +17,7 @@ router.get('/new', isLoggedIn, function(req, res){
     });
 });
 // comments create
-router.post('/', function(req, res){
+router.post('/', isLoggedIn, function(req, res){
     // find playground by id
     Playground.findById(req.params.id, function(err, playground){
       if (err) {
