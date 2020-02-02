@@ -54,18 +54,14 @@ router.get('/:id', function(req, res) {
 });
 
 // EDIT 
-router.get('/:id/edit', function(req, res){
+router.get('/:id/edit', checkPlaygroundOwnership, function(req, res){
   Playground.findById(req.params.id, function(err, foundPlayground){
-    if(err){
-      res.redirect('/playground');
-    } else {
-      res.render('playgrounds/edit', { playground: foundPlayground });
-    }
+    res.render('playgrounds/edit', { playground: foundPlayground });
   });
 });
 
 // UPDATE
-router.put('/:id', function(req, res){
+router.put('/:id', checkPlaygroundOwnership, function(req, res){
   // find and update playground
   Playground.findByIdAndUpdate(req.params.id, req.body.playground, function(err, updatedPlayground){
     if(err){
@@ -77,7 +73,7 @@ router.put('/:id', function(req, res){
 });
 
 // DESTROY
-router.delete('/:id', function(req, res){
+router.delete('/:id', checkPlaygroundOwnership, function(req, res){
   Playground.findByIdAndRemove(req.params.id, function(err){
     if (err) {
       res.redirect('/playgrounds');
@@ -93,5 +89,23 @@ function isLoggedIn(req, res, next){
     };
     res.redirect('/login');
 };
+
+function checkPlaygroundOwnership(req, res, next){
+  if(req.isAuthenticated()){
+    Playground.findById(req.params.id, function(err, foundPlayground){
+      if (err){
+        console.log(err);
+      } else {
+        if(foundPlayground.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect('back');
+        }
+      }
+    });
+  } else {
+    res.redirect('back')
+  }
+}
 
 module.exports = router;
