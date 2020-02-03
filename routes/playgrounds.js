@@ -104,8 +104,8 @@ function checkPlaygroundOwnership(req, res, next){
       }
     });
   } else {
-    res.redirect('back')
+    res.redirect('back');
   }
-}
+};
 
 module.exports = router;

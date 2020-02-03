@@ -10,6 +10,6 @@
 .card .caption {
     padding: 0.5rem;
 }
-#delete-form {
+.delete-form {
     display: inline;
 }
