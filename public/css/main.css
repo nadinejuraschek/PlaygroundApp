@@ -71,6 +71,16 @@ nav a:hover,
     background-color: #FEC8D8;
     color: #555f61;
 }
+.login-btn,
+    .edit-btn {
+        background-color: #F7EF64;
+        color: #555f61;
+}
+.login-btn:hover,
+    .edit-btn:hover {
+        color: #555f61;
+        font-weight: 700;
+}
 
 /**********************************************
  LANDING PAGE
@@ -160,6 +170,9 @@ header {
 .space-top {
     margin-top: 2rem;
 }
+.space-bottom {
+    margin-bottom: 3rem;
+}
 .divider {
     border: none;
     border-bottom: 1px solid #555f6140;
@@ -208,7 +221,14 @@ header {
 .delete-form {
     display: inline;
 }
-
+.list-group-item.active {
+    background-color: #F7EF64;
+    border: 1px solid #F7EF64;
+    color: #555f61;
+}
+.list-group-item.active:hover {
+    font-weight: 700;
+}
 
 /**********************************************
  EDIT / ADD

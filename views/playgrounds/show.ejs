@@ -9,12 +9,12 @@
                 <li class="list-group-item">Features - Coming Soon</li>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 space-bottom">
             <div class="card detail-card">
                 <img class="img-responsive" src="<%= playground.image %>">
                 <div class="card-body">
-                    <h4 class="float-right">$9.00/night</h4>
-                    <h4><a href="#"><%= playground.name %></a></h4>
+                    <h6 class="float-right">Free</h6>
+                    <h4><%= playground.name %></h4>
                     <p><%= playground.description %></p>
                     <p>
                         <em>Submitted by <%= playground.author.username %></em>
@@ -31,7 +31,7 @@
             </div>
             <div class="card detail-card space-top card-body">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/playgrounds/<%= playground._id %>/comments/new">Add a Comment</a>
+                    <a class="btn btn-rounded btn-md add-btn" href="/playgrounds/<%= playground._id %>/comments/new">Add a Comment</a>
                 </div>
                 <hr>
                 <% playground.comments.forEach(function(comment){ %>

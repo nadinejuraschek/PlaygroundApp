@@ -14,7 +14,7 @@ var data = [
     {
         name: "Magical Rainbow Park", 
         image: "https://images.unsplash.com/photo-1555851117-49167a4d285f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80",
-        description: "Our favorite playground! Grand park with lots of monkey bars and climbing equipment, slides and swings for older kids and toddlers, as well as a small sandbox. There are multiple benches for parents to sit nearby. A public restroom is also available.",
+        description: "Grand park with lots of monkey bars and climbing equipment, slides and swings for older kids and toddlers, as well as a small sandbox. There are multiple benches for parents to sit nearby. A public restroom is also available.",
         author: {
             username: "HappyMama"
         }
@@ -51,8 +51,15 @@ function seedDB(){
                         //create a comment
                         Comment.create(
                             {
-                                text: "This place is great, but I wish there was internet",
-                                author: "Homer"
+                                text: "Our favorite playground!",
+                                author: {
+                                    username: "Nora"
+                                }
+                            }, {
+                                text: "I wish there were picnic tables.",
+                                author: {
+                                    username: "BenjaminS"
+                                }
                             }, function(err, comment){
                                 if(err){
                                     console.log(err);
