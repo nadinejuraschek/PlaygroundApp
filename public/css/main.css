@@ -125,3 +125,6 @@ nav {
 footer {
     z-index: 1;
 }
+.contact-links {
+    display: block;
+}
