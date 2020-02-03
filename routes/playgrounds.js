@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
       if(err){
         console.log("Error: " + err);
       } else {
-        res.render('playgrounds/index', { playgrounds: allPlaygrounds });
+        res.render('playgrounds/index', { title: 'All Playgrounds', playgrounds: allPlaygrounds });
       };
     });
 });
@@ -41,7 +41,7 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
 });
 // NEW - show form to add playground
 router.get('/new', middleware.isLoggedIn, function(req, res) {
-    res.render('playgrounds/new');
+    res.render('playgrounds/new', { title: 'Add A Playground' });
 });
 
 // SHOW - displays more info about a specific playground
@@ -49,7 +49,7 @@ router.get('/:id', function(req, res) {
     // find playground with provided ID
     Playground.findById(req.params.id).populate('comments').exec(function(err, foundPlayground){
       if (err) console.log(err);
-      res.render('playgrounds/show', { playground: foundPlayground });
+      res.render('playgrounds/show', { title: '<%= foundPlayground.name %>', playground: foundPlayground });
     });
     // render show temp with that playground
 });
@@ -57,7 +57,7 @@ router.get('/:id', function(req, res) {
 // EDIT 
 router.get('/:id/edit', middleware.checkPlaygroundOwnership, function(req, res){
   Playground.findById(req.params.id, function(err, foundPlayground){
-    res.render('playgrounds/edit', { playground: foundPlayground });
+    res.render('playgrounds/edit', { title: 'Edit A Playground', playground: foundPlayground });
   });
 });
 

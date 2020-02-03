@@ -6,13 +6,13 @@ const   express     = require('express');
         Comment     = require('../models/comment');
 
 router.get('/', function(req, res) {
-    res.render('landing');
+    res.render('landing', { title: 'Home' });
 });
 
 // AUTHENTICATION
 // show signup form
 router.get('/register', function(req, res){
-  res.render('register');
+  res.render('register', { title: 'Register' });
 });
 // handle sign up logic
 router.post('/register', function(req, res){
@@ -20,7 +20,7 @@ router.post('/register', function(req, res){
     User.register(newUser, req.body.password, function(err, user) {
       if (err) {
         console.log(err);
-        return res.render('register');
+        return res.render('register', { title: 'Register' });
       }
       passport.authenticate('local')(req, res, function(){
         res.redirect('/playgrounds');
@@ -29,7 +29,7 @@ router.post('/register', function(req, res){
 });
 // show login form
 router.get('/login', function(req, res){
-    res.render('login');
+    res.render('login', { title: 'Log In' });
 });
 // handle login logic
 router.post('/login', passport.authenticate('local', 

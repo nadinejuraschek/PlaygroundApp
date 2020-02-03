@@ -13,7 +13,7 @@ router.get('/new', middleware.isLoggedIn, function(req, res){
       } else {
         // console.log(req.params.id);
         // console.log(playground);
-        res.render('comments/new', { playground: playground });
+        res.render('comments/new', { title: 'Add A Comment', playground: playground });
       };
     });
 });
@@ -50,7 +50,7 @@ router.get('/:comment_id/edit', middleware.checkCommentOwnership, function(req, 
     if (err) {
       res.redirect('back');
     } else {
-      res.render('comments/edit', { playground_id: req.params.id, comment: foundComment });
+      res.render('comments/edit', { title: 'Edit Comment', playground_id: req.params.id, comment: foundComment });
     }
   });
 });
