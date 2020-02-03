@@ -1,7 +1,9 @@
-const   express   = require('express');
-        router    = express.Router()
-        passport  = require('passport'),
-        User      = require('../models/user');
+const   express     = require('express');
+        router      = express.Router()
+        passport    = require('passport'),
+        User        = require('../models/user'),
+        Playground  = require('../models/playground'),
+        Comment     = require('../models/comment');
 
 router.get('/', function(req, res) {
     res.render('landing');
@@ -42,11 +44,4 @@ router.get('/logout', function(req, res){
     res.redirect('/');
 });
   
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-      return next();
-    };
-    res.redirect('/login');
-};
-
 module.exports = router;

@@ -1,6 +1,7 @@
 const   express     = require('express');
         router      = express.Router({mergeParams: true}),
-        Playground  = require('../models/playground');
+        Playground  = require('../models/playground'),
+        middleware = require('../middleware/index');
 
 // INDEX - show all playgrounds
 router.get('/', function(req, res) {
@@ -15,7 +16,7 @@ router.get('/', function(req, res) {
 });
 
 // CREATE - add new playground to DB
-router.post('/', isLoggedIn, function(req, res) {
+router.post('/', middleware.isLoggedIn, function(req, res) {
     // get data from form
     let newPlayground = { 
       name: req.body.playgroundName, 
@@ -39,7 +40,7 @@ router.post('/', isLoggedIn, function(req, res) {
     });
 });
 // NEW - show form to add playground
-router.get('/new', isLoggedIn, function(req, res) {
+router.get('/new', middleware.isLoggedIn, function(req, res) {
     res.render('playgrounds/new');
 });
 
@@ -54,14 +55,14 @@ router.get('/:id', function(req, res) {
 });
 
 // EDIT 
-router.get('/:id/edit', checkPlaygroundOwnership, function(req, res){
+router.get('/:id/edit', middleware.checkPlaygroundOwnership, function(req, res){
   Playground.findById(req.params.id, function(err, foundPlayground){
     res.render('playgrounds/edit', { playground: foundPlayground });
   });
 });
 
 // UPDATE
-router.put('/:id', checkPlaygroundOwnership, function(req, res){
+router.put('/:id', middleware.checkPlaygroundOwnership, function(req, res){
   // find and update playground
   Playground.findByIdAndUpdate(req.params.id, req.body.playground, function(err, updatedPlayground){
     if(err){
@@ -73,7 +74,7 @@ router.put('/:id', checkPlaygroundOwnership, function(req, res){
 });
 
 // DESTROY
-router.delete('/:id', checkPlaygroundOwnership, function(req, res){
+router.delete('/:id', middleware.checkPlaygroundOwnership, function(req, res){
   Playground.findByIdAndRemove(req.params.id, function(err){
     if (err) {
       res.redirect('/playgrounds');
@@ -82,30 +83,5 @@ router.delete('/:id', checkPlaygroundOwnership, function(req, res){
     }
   })
 });
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-      return next();
-    };
-    res.redirect('/login');
-};
-
-function checkPlaygroundOwnership(req, res, next){
-  if(req.isAuthenticated()){
-    Playground.findById(req.params.id, function(err, foundPlayground){
-      if (err){
-        console.log(err);
-      } else {
-        if(foundPlayground.author.id.equals(req.user._id)) {
-          next();
-        } else {
-          res.redirect('back');
-        }
-      }
-    });
-  } else {
-    res.redirect('back');
-  }
-};
 
 module.exports = router;
