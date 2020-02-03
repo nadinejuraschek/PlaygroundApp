@@ -2,9 +2,9 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Add Comment to <%= playground.name %></h1>
+        <h1 class="text-center">Edit Comment</h1>
         <div>
-            <form action="/playgrounds/<%= playground._id %>/comments" method="POST">
+            <form action="/playgrounds/<%= playground_id %>/comments" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="comment[text]" placeholder="comment">
                 </div>
@@ -12,7 +12,7 @@
                     <button type="submit" class="btn btn-danger btn-block"></button>
                 </div>
             </form>
-            <a class="" href="/playground_id">Back</a>
+            <a href="/playgrounds">Back</a>
         </div>
     </div>
 </div>

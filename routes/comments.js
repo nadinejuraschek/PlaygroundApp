@@ -3,7 +3,7 @@ const   express     = require('express'),
         Playground  = require('../models/playground'),
         Comment     = require('../models/comment');
 
-// comments new
+// NEW
 router.get('/new', isLoggedIn, function(req, res){
     // look up playground with id
     Playground.findById(req.params.id, function(err, playground){
@@ -16,7 +16,7 @@ router.get('/new', isLoggedIn, function(req, res){
       };
     });
 });
-// comments create
+// CREATE
 router.post('/', isLoggedIn, function(req, res){
     // find playground by id
     Playground.findById(req.params.id, function(err, playground){
@@ -40,6 +40,28 @@ router.post('/', isLoggedIn, function(req, res){
           };
         });
       };
+    });
+});
+
+// EDIT
+router.get('/:comment_id/edit', function(req, res){
+  Comment.findById(req.params.comment_id, function(err, foundComment){
+    if (err) {
+      res.redirect('back');
+    } else {
+      res.render('comments/edit', { playground_id: req.params.id, comment: foundComment });
+    }
+  });
+});
+
+// UPDATE
+router.put('/:comment_id', function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+      if (err) {
+        res.redirect('back');
+      } else {
+        res.redirect('/playgrounds/' + req.params.id);
+      }
     });
 });
 
