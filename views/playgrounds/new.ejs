@@ -2,24 +2,25 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Create a New Playground</h1>
-
-        <div>
+        <div class="col-12">
+            <h1 class="form-heading text-center">New Playground</h1>
+        </div>
+        <div class="col-12">
             <form action="/playgrounds" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="playgroundName" placeholder="name">
+                    <input id="input" class="form-control" type="text" name="playgroundName" placeholder="name">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="playgroundImg" placeholder="image url">
+                    <input id="input" class="form-control" type="text" name="playgroundImg" placeholder="image url">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="description" placeholder="description">
+                    <input id="input" class="form-control" type="text" name="description" placeholder="description">
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-danger btn-block"></button>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-lg btn-rounded add-btn">Submit</button>
                 </div>
             </form>
-            <a href="/playgrounds">Back</a>
+            <a class="back-btn" href="/playgrounds"><i class="fas fa-arrow-left"></i></a>
         </div>
     </div>
 </div>

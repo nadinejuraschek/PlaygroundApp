@@ -2,35 +2,89 @@
  GENERAL STYLES
 **********************************************/
 body {
+    color: #555f61;
     font-family: 'Open Sans', 'Arial', sans-serif;
 }
 
 /**********************************************
  NAVIGATION
 **********************************************/
-nav {
+nav, 
+    footer {
+    background-color: #83C6DD;
+    color: #ffffff;
     z-index: 1;
 }
+nav a, 
+    footer a {
+        color: #ffffff;
+}
+nav a:hover, 
+    footer a:hover {
+        color: #F7EF64;
+        font-weight: 800;
+        text-decoration: none;
+}
 .navbar-brand {
-    font-family: 'Cabin Sketch', 'Arial', sans-serif;
+    color: #F7EF64;
     font-size: 2rem;
+}
+.mute-link:hover {
+    color: #ffffff;
+}
+.logo-font {
+    font-family: 'Cabin Sketch', 'Arial', sans-serif;
+}
+.lg-brand {
+    font-size: 8rem;
+}
+.md-brand {
+    font-size: 4rem;
 }
 
 /**********************************************
  BUTTONS
 **********************************************/
+.btn-rounded {
+    border: none;
+    border-radius: 40rem;
+    color: #ffffff;
+}
+.btn-lg {
+    width: 18rem;
+}
+.btn-sm {
+    padding: 0.5rem;
+    width: 7rem;
+}
+.add-btn {
+    background-color: #90C978;
+}
+.back-btn {
+    color: #555f61;
+    font-size: 2rem;
+}
+.back-btn:hover {
+    color: #83C6DD;
+}
+.info-btn {
+    background-color: #FEC8D8;
+    color: #555f61;
+}
 
 /**********************************************
  LANDING PAGE
 **********************************************/
 #landing-header {
-    z-index: 1;
-    position: relative;
     text-align: center;
-    padding-top: 40vh;
+    padding-top: 20vh;
+    position: relative;
+    z-index: 1;
 }
 #landing-header h1 {
-    color: #fff;
+    color: #343535;
+    font-family: 'Cabin Sketch', 'Arial', sans-serif;
+    font-size: 5rem;
 }
 .slideshow { 
     position: fixed;
@@ -57,22 +111,22 @@ nav {
     animation: imageAnimation 50s linear infinite; 
 }
 .slideshow li:nth-child(1) { 
-    background-image: url(https://images.unsplash.com/photo-1575783970733-1aaedde1db74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80) 
+    background-image: linear-gradient(#ffffff80, #ffffff80), url(https://images.unsplash.com/photo-1566938089211-5821c49b3548?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80)
 }
 .slideshow li:nth-child(2) { 
-    background-image: url(https://images.unsplash.com/photo-1436915947297-3a94186c8133?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1866&q=80);
+    background-image: linear-gradient(#ffffff80, #ffffff80), url(https://images.unsplash.com/photo-1436915947297-3a94186c8133?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1866&q=80);
     animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-    background-image: url(https://images.unsplash.com/photo-1566938089211-5821c49b3548?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80);
+    background-image: linear-gradient(#ffffff80, #ffffff80), url(https://images.unsplash.com/photo-1575783970733-1aaedde1db74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80);
     animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-    background-image: url(https://images.unsplash.com/photo-1555851117-49167a4d285f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80);
+    background-image: linear-gradient(#ffffff80, #ffffff80), url(https://images.unsplash.com/photo-1555851117-49167a4d285f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80);
     animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-    background-image: url(https://images.unsplash.com/photo-1513240794845-9add4d6a3b5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+    background-image: linear-gradient(#ffffff80, #ffffff80), url(https://images.unsplash.com/photo-1513240794845-9add4d6a3b5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
     animation-delay: 40s; 
 }
 /*** ANIMATION ***/
@@ -97,15 +151,56 @@ nav {
 	opacity: 1;
 }
 
+/**********************************************
+ ALL PLAYGROUNDS PAGE
+**********************************************/
+header {
+    margin: 2rem auto;
+}
+.space-top {
+    margin-top: 2rem;
+}
+.divider {
+    border: none;
+    border-bottom: 1px solid #555f6140;
+    margin: 2.5rem auto;
+    width: 80%;
+}
+.section-heading {
+    font-weight: 700;
+}
+.preview-cards {
+    margin: 2rem 0;
+}
+.preview-img {
+    height: 8.75rem;
+    object-fit: cover;
+}
+.caption {
+    font-size: 1.5rem;
+}
+.card {
+    /* border: none; */
+    border-radius: 40px;
+}
 
 /**********************************************
  PLAYGROUND DETAIL VIEW
 **********************************************/
+.show-page {
+    margin: 2rem auto;
+}
+.detail-card {
+    border-radius: 4px;
+}
 .card img {
     width: 100%;
 }
 .card {
     padding: 0;
+}
+.card-body {
+    padding: 2rem;
 }
 .card .caption {
     padding: 0.5rem;
@@ -114,17 +209,32 @@ nav {
     display: inline;
 }
 
+
 /**********************************************
  EDIT / ADD
 **********************************************/
-
+.form-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 2rem auto;
+}
+#input {
+    border-radius: 40px;
+    height: 3rem;
+    padding-left: 2rem;
+}
 
 /**********************************************
  FOOTER
 **********************************************/
 footer {
-    z-index: 1;
+    font-size: 1rem;
+    padding: 0.75rem;
 }
-.contact-links {
-    display: block;
+.copyright,
+    .dev-name {
+        margin-right: 1rem;
+}
+.dev-links {
+    margin-left: 0.5rem;
 }
