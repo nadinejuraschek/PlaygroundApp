@@ -36,45 +36,44 @@ function seedDB(){
             console.log(err);
         }
         console.log("removed playgrounds!");
-        Comment.remove({}, function(err) {
-            if(err){
-                console.log(err);
-            }
-            console.log("removed comments!");
+        // Comment.remove({}, function(err) {
+        //     if(err){
+        //         console.log(err);
+        //     }
+        //     console.log("removed comments!");
              //add a few playgrounds
-            data.forEach(function(seed){
-                Playground.create(seed, function(err, playground){
-                    if(err){
-                        console.log(err)
-                    } else {
-                        console.log("added a playground");
-                        //create a comment
-                        Comment.create(
-                            {
-                                text: "Our favorite playground!",
-                                author: {
-                                    username: "Nora"
-                                }
-                            }, {
-                                text: "I wish there were picnic tables.",
-                                author: {
-                                    username: "BenjaminS"
-                                }
-                            }, function(err, comment){
-                                if(err){
-                                    console.log(err);
-                                } else {
-                                    playground.comments.push(comment);
-                                    playground.save();
-                                    console.log("Created new comment");
-                                }
-                            });
-                    }
-                });
-            });
-        });
+    //         data.forEach(function(seed){
+    //             Playground.create(seed, function(err, playground){
+    //                 if(err){
+    //                     console.log(err)
+    //                 } else {
+    //                     console.log("added a playground");
+    //                     //create a comment
+    //                     Comment.create(
+    //                         {
+    //                             text: "Our favorite playground!",
+    //                             author: {
+    //                                 username: "Nora"
+    //                             }
+    //                         }, {
+    //                             text: "I wish there were picnic tables.",
+    //                             author: {
+    //                                 username: "BenjaminS"
+    //                             }
+    //                         }, function(err, comment){
+    //                             if(err){
+    //                                 console.log(err);
+    //                             } else {
+    //                                 playground.comments.push(comment);
+    //                                 playground.save();
+    //                                 console.log("Created new comment");
+    //                             }
+    //                         });
+    //                 }
+    //             });
+    //         });
+    //     });
     }); 
-    //add a few comments
 }
  
 module.exports = seedDB;
