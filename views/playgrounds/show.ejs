@@ -8,6 +8,9 @@
                 <li class="list-group-item">Location - Coming Soon</li>
                 <li class="list-group-item">Features - Coming Soon</li>
             </div>
+            <div class="space-top">
+                <a class="back-btn" href="/playgrounds"><i class="fas fa-arrow-left"></i></a>
+            </div>
         </div>
         <div class="col-md-9 space-bottom">
             <div class="card detail-card">
@@ -21,9 +24,9 @@
                     </p>
 
                     <% if(currentUser && playground.author.id.equals(currentUser._id)) { %>
-                        <a href='/playgrounds/<%= playground._id %>/edit' class='btn edit-btn'>Edit</a>
+                        <a href='/playgrounds/<%= playground._id %>/edit' class='btn btn-rounded btn-sm edit-btn'>Edit</a>
                         <form class="delete-form" action='/playgrounds/<%= playground._id %>?_method=DELETE' method='POST'>
-                            <button class='btn btn-rounded btn-md'>Delete</button>
+                            <button class='btn btn-rounded btn-sm delete-btn'>Delete</button>
                         </form>
                     <% } %>
 
@@ -42,17 +45,18 @@
                             <p><%= comment.text %></p>
 
                             <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-                                <a class="btn btn-warning" href="/playgrounds/<%= playground._id %>/comments/<%= comment._id %>/edit">
+                                <a class="btn btn-rounded btn-sm edit-btn" href="/playgrounds/<%= playground._id %>/comments/<%= comment._id %>/edit">
                                     Edit
                                 </a>
                                 <form class="delete-form" action="/playgrounds/<%= playground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                    <button class='btn btn-primary'>Delete</button>
+                                    <button class='btn btn-rounded btn-sm delete-btn'>Delete</button>
                                 </form>
                             <% } %>
                             
                         </div>
                     </div>
                 <% }); %>
+                
             </div>
         </div>
     </div>
