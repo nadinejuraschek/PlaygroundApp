@@ -32,21 +32,23 @@
 <body>
 
 <!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand logo-font" href="/">RECREO</a>
+<% if (title != 'Home') { %>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand logo-font" href="/">RECREO</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <% if(!currentUser) { %>
+                    <li class="nav-link"><a href="/login">Log In</a></li>
+                    <li class="nav-link"><a href="/register">Sign Up</a></li>
+                    <% } else { %>
+                    <li class="nav-link mute-link">Signed In As <%= currentUser.username %></li>
+                    <li class="nav-link"><a href="/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+                    <% } %>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <% if(!currentUser) { %>
-                <li class="nav-link"><a href="/login">Log In</a></li>
-                <li class="nav-link"><a href="/register">Sign Up</a></li>
-                <% } else { %>
-                <li class="nav-link mute-link">Signed In As <%= currentUser.username %></li>
-                <li class="nav-link"><a href="/logout"><i class="fas fa-sign-out-alt"></i></a></li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
+<% } %>

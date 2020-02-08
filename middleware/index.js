@@ -7,7 +7,8 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     };
-        res.redirect('/login');
+    req.flash('success', 'Please log in first.');
+    res.redirect('/login');
 };
 
 middlewareObj.checkPlaygroundOwnership = function(req, res, next){
