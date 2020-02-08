@@ -64,11 +64,12 @@ nav a:hover,
     color: #555f61;
     font-size: 2rem;
 }
-.back-btn:hover {
-    color: #83C6DD;
+.back-btn:hover,
+    .continue-btn:hover {
+        color: #83C6DD;
 }
 .info-btn {
-    background-color: #FEC8D8;
+    background-color: #F8D6DA;
     color: #555f61;
 }
 .login-btn,
@@ -91,6 +92,14 @@ nav a:hover,
 .continue-btn {
     color: #343535;
     font-size: 2rem;
+}
+
+/**********************************************
+ ALERTS
+**********************************************/
+.alert-success {
+    background-color: #DEFFD1;
+    border-color: #CEF2C1;
 }
 
 /**********************************************

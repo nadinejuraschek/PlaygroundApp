@@ -1,7 +1,7 @@
 const   express     = require('express');
         router      = express.Router({mergeParams: true}),
         Playground  = require('../models/playground'),
-        middleware = require('../middleware/index');
+        middleware  = require('../middleware/index');
 
 // INDEX - show all playgrounds
 router.get('/', function(req, res) {

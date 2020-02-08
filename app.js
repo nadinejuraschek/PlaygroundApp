@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 const express         = require('express'),
-      app             = express(),
       ejs             = require('ejs'),
       mongoose        = require('mongoose'),
       flash           = require('connect-flash'),
+      app             = express(),
       passport        = require('passport'),
       LocalStrategy   = require('passport-local'),
       methodOverride  = require('method-override'),
@@ -44,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
   next();
 });
 
