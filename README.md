@@ -21,6 +21,8 @@ The goal is to create an app that lets users add playgrounds with images and hel
     * passport-local
     * connect-flash
     * moment
+    * cloudinary
+    * multer
 * mongoDB
 
 ### How It Works

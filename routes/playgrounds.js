@@ -1,7 +1,30 @@
 const   express     = require('express');
         router      = express.Router({mergeParams: true}),
+        multer      = require('multer'),
+        cloudinary = require('cloudinary'),
         Playground  = require('../models/playground'),
         middleware  = require('../middleware/index');
+
+// IMAGE UPLOAD
+const storage = multer.diskStorage({
+    filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+const imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+const upload = multer({ storage: storage, fileFilter: imageFilter})
+
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key:    process.env.CLOUD_API_KEY, 
+  api_secret: process.env.CLOUD_ENV
+});
 
 // INDEX - show all playgrounds
 router.get('/', function(req, res) {
@@ -16,29 +39,30 @@ router.get('/', function(req, res) {
 });
 
 // CREATE - add new playground to DB
-router.post('/', middleware.isLoggedIn, function(req, res) {
-    // get data from form
-    let newPlayground = { 
-      name: req.body.playgroundName, 
-      image: req.body.playgroundImg, 
-      description: req.body.description, 
-      author: { 
-        id: req.user._id, 
-        username: req.user.username 
-      } 
-    };
-
+router.post('/', middleware.isLoggedIn, upload.single('image'), function(req, res) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    // add cloudinary url for the image to the playground object under image property
+    req.body.playground.image = result.secure_url;
+    // add author to playground
+    req.body.playground.author = {
+      id: req.user._id,
+      username: req.user.username
+    }
     // create new playground and save to DB
-    Playground.create(newPlayground, function(err, addPlayground) {
+    Playground.create(req.body.playground, function(err, playground) {
       if(err) {
-        console.log('Error: ' + err);
+        // console.log('Error: ' + err);
+        req.flash('error', err.message);
+        return res.redirect('back');
       } else {
         // redirect to playgrounds
-        console.log(addPlayground);
-        res.redirect('/playgrounds');
+        console.log('New Playground: ' + playground);
+        res.redirect('/playgrounds/' + playground.id);
       };
     });
+  });
 });
+
 // NEW - show form to add playground
 router.get('/new', middleware.isLoggedIn, function(req, res) {
     res.render('playgrounds/new', { title: 'Add A Playground' });
