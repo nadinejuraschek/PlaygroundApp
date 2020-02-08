@@ -20,17 +20,17 @@ The goal is to create an app that lets users add playgrounds with images and hel
     * mongoose
     * passport-local
     * connect-flash
+    * moment
 * mongoDB
 
 ### How It Works
 
 ### Future Development Goals
-* location and Google Maps view
+* location and maps view
 * opening/operation hours
 * features for each playground (e.g. 'Toddler Equipment', 'Restrooms', 'Picnic Area', etc.)
 * user profile and admin role
 * ratings
-* display time since comment was created
 * forgot password? link to reset password
 * image upload
 * notifications

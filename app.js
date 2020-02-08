@@ -30,6 +30,9 @@ app.use(flash());
 
 // seedDB();
 
+// MOMENT
+app.locals.moment = require('moment');
+
 // PASSPORT CONFIG
 app.use(require('express-session')({
   secret: process.env.APP_SECRET,
