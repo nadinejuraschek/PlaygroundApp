@@ -19,6 +19,7 @@ The goal is to create an app that lets users add playgrounds with images and hel
     * methodOverride
     * mongoose
     * passport-local
+    * connect-flash
 * mongoDB
 
 ### How It Works
@@ -28,7 +29,6 @@ The goal is to create an app that lets users add playgrounds with images and hel
 * opening/operation hours
 * features for each playground (e.g. 'Toddler Equipment', 'Restrooms', 'Picnic Area', etc.)
 * user profile and admin role
-* flash messages
 * ratings
 * display time since comment was created
 * forgot password? link to reset password
