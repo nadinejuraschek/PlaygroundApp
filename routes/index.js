@@ -19,10 +19,12 @@ router.post('/register', function(req, res){
     const newUser = new User({ username: req.body.username });
     User.register(newUser, req.body.password, function(err, user) {
       if (err) {
+        req.flash('error', err.message + '.');
         console.log(err);
         return res.render('register', { title: 'Register' });
       }
       passport.authenticate('local')(req, res, function(){
+        req.flash('success', 'Welcome to RECREO, ' + user.username + '!');
         res.redirect('/playgrounds');
       });
     });

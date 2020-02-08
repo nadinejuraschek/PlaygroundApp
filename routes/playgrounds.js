@@ -57,7 +57,12 @@ router.get('/:id', function(req, res) {
 // EDIT 
 router.get('/:id/edit', middleware.checkPlaygroundOwnership, function(req, res){
   Playground.findById(req.params.id, function(err, foundPlayground){
-    res.render('playgrounds/edit', { title: 'Edit A Playground', playground: foundPlayground });
+    if (err) {
+      req.flash('error', 'Playground not found.');
+      res.redirect('back');
+    } else {
+      res.render('playgrounds/edit', { title: 'Edit A Playground', playground: foundPlayground });
+    };
   });
 });
 
@@ -77,8 +82,10 @@ router.put('/:id', middleware.checkPlaygroundOwnership, function(req, res){
 router.delete('/:id', middleware.checkPlaygroundOwnership, function(req, res){
   Playground.findByIdAndRemove(req.params.id, function(err){
     if (err) {
+      req.flash('error', 'Playground not found.');
       res.redirect('/playgrounds');
     } else {
+      req.flash('success', 'Playground has been removed.');
       res.redirect('/playgrounds');
     }
   })
