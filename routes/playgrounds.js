@@ -29,18 +29,24 @@ cloudinary.config({
 // INDEX - show all playgrounds
 router.get('/', function(req, res) {
     // get all playgrounds from DB
-    Playground.find({}, function(err, allPlaygrounds){
-      if(err){
-        console.log("Error: " + err);
-      } else {
-        res.render('playgrounds/index', { title: 'All Playgrounds', playgrounds: allPlaygrounds });
-      };
+    const perPage = 12;
+    const pageQuery = parseInt(req.query.page);
+    const pageNum = pageQuery ? pageQuery : 1;
+    Playground.find({}).skip((perPage * pageNum) - perPage).limit(perPage).exec(function(err, allPlaygrounds){
+      Playground.count().exec(function(err, count) {
+        if(err){
+          console.log("Error: " + err);
+        } else {
+          res.render('playgrounds/index', { title: 'All Playgrounds', playgrounds: allPlaygrounds, current: pageNum, pages: Math.ceil(count / perPage) });
+        };
+      });
     });
 });
 
 // CREATE - add new playground to DB
 router.post('/', middleware.isLoggedIn, upload.single('image'), function(req, res) {
-  cloudinary.uploader.upload(req.file.path, function(result) {
+  // console.log(req.file.path);
+  cloudinary.v2.uploader.upload(req.file.path, function(error, result) {
     // add cloudinary url for the image to the playground object under image property
     req.body.playground.image = result.secure_url;
     // add author to playground
