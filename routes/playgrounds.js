@@ -18,12 +18,12 @@ const imageFilter = function (req, file, cb) {
     }
     cb(null, true);
 };
-const upload = multer({ storage: storage, fileFilter: imageFilter})
+const upload = multer({ storage: storage, fileFilter: imageFilter});
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key:    process.env.CLOUD_API_KEY, 
-  api_secret: process.env.CLOUD_ENV
+  api_secret: process.env.CLOUD_SECRET
 });
 
 // INDEX - show all playgrounds
@@ -45,14 +45,15 @@ router.get('/', function(req, res) {
 
 // CREATE - add new playground to DB
 router.post('/', middleware.isLoggedIn, upload.single('image'), function(req, res) {
+// router.post('/', middleware.isLoggedIn, function(req, res) {
   // console.log(req.file.path);
   cloudinary.v2.uploader.upload(req.file.path, function(error, result) {
     // add cloudinary url for the image to the playground object under image property
     req.body.playground.image = result.secure_url;
     // add author to playground
     req.body.playground.author = {
-      id: req.user._id,
-      username: req.user.username
+     id: req.user._id,
+     username: req.user.username
     }
     // create new playground and save to DB
     Playground.create(req.body.playground, function(err, playground) {

@@ -93,6 +93,9 @@ nav a:hover,
     color: #343535;
     font-size: 2rem;
 }
+.continue-btn:hover {
+    color: #ffffff;
+}
 
 /**********************************************
  ALERTS

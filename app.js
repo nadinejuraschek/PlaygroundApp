@@ -19,7 +19,12 @@ const indexRoutes     = require('./routes/index'),
       commentRoutes   = require('./routes/comments');
 
 // DATABASE
-mongoose.connect('mongodb://localhost:27017/playground_app', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(
+  process.env.MONGO_ATLAS, {
+  // || 'mongodb://localhost:27017/playground_app', { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true
+});
 
 app.use(express.urlencoded({ extended: true }));
 
