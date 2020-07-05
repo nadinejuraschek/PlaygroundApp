@@ -65,3 +65,4 @@ The goal is to create an app that lets users add playgrounds with images and hel
 * forgot password? link to reset password
 * image upload
 * more notifications
+* improved responsiveness
