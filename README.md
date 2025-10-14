@@ -1,5 +1,5 @@
 # RECREO
-## Find Your Next Playtime Location
+## Find Your Next Play Date Location
 by browsing playgrounds and parks in your area and finding helpful information about their equipment and amenities.
 
 ##### Live Demo
